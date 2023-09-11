@@ -1,6 +1,6 @@
 package ru.perminov.DAO;
 
-import ru.perminov.Entity.Player;
+import ru.perminov.Entity.PlayerEntity;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -27,8 +27,8 @@ public class PlayerDAO {
     }
   }
 
-  public List<Player> index() {
-    List<Player> players = new ArrayList<>();
+  public List<PlayerEntity> index() {
+    List<PlayerEntity> players = new ArrayList<>();
 
     try {
       Statement statement = connection.createStatement();
@@ -36,19 +36,19 @@ public class PlayerDAO {
       ResultSet resultSet = statement.executeQuery(SQL);
 
       while (resultSet.next()) {
-        Player player = new Player();
-
-        player.setId(resultSet.getLong("id"));
-        player.setShort_name(resultSet.getString("short_name"));
-        player.setLong_name(resultSet.getString("long_name"));
-        player.setPlayer_positions(resultSet.getString("player_positions"));
-        player.setValue_eur(resultSet.getInt("value_eur"));
-        player.setAge(resultSet.getInt("age"));
-        player.setHeight_cm(resultSet.getInt("height_cm"));
-        player.setWeight_kg(resultSet.getInt("weight_kg"));
-        player.setLeague_name(resultSet.getString("league_name"));
-        player.setClub_name(resultSet.getString("club_name"));
-        player.setNationality_name(resultSet.getString("nationality_name"));
+        PlayerEntity player = PlayerEntity.builder()
+            .setId(resultSet.getLong("id"))
+            .setShort_name(resultSet.getString("short_name"))
+            .setLong_name(resultSet.getString("long_name"))
+            .setPlayer_positions(resultSet.getString("player_positions"))
+            .setValue_eur(resultSet.getInt("value_eur"))
+            .setAge(resultSet.getInt("age"))
+            .setHeight_cm(resultSet.getInt("height_cm"))
+            .setWeight_kg(resultSet.getInt("weight_kg"))
+            .setLeague_name(resultSet.getString("league_name"))
+            .setClub_name(resultSet.getString("club_name"))
+            .setNationality_name(resultSet.getString("nationality_name"))
+            .build();
 
         players.add(player);
       }
@@ -64,8 +64,8 @@ public class PlayerDAO {
     return players;
   }
 
-  public Player show (int id) {
-    Player player = null;
+  public PlayerEntity show (int id) {
+    PlayerEntity player = null;
 
     try {
       PreparedStatement preparedStatement =
@@ -77,19 +77,20 @@ public class PlayerDAO {
 
       resultSet.next();
 
-      player = new Player();
+      player = PlayerEntity.builder()
+          .setId(resultSet.getLong("id"))
+          .setShort_name(resultSet.getString("short_name"))
+          .setLong_name(resultSet.getString("long_name"))
+          .setPlayer_positions(resultSet.getString("player_positions"))
+          .setValue_eur(resultSet.getInt("value_eur"))
+          .setAge(resultSet.getInt("age"))
+          .setHeight_cm(resultSet.getInt("height_cm"))
+          .setWeight_kg(resultSet.getInt("weight_kg"))
+          .setLeague_name(resultSet.getString("league_name"))
+          .setClub_name(resultSet.getString("club_name"))
+          .setNationality_name(resultSet.getString("nationality_name"))
+          .build();
 
-      player.setId(resultSet.getLong("id"));
-      player.setShort_name(resultSet.getString("short_name"));
-      player.setLong_name(resultSet.getString("long_name"));
-      player.setPlayer_positions(resultSet.getString("player_positions"));
-      player.setValue_eur(resultSet.getInt("value_eur"));
-      player.setAge(resultSet.getInt("age"));
-      player.setHeight_cm(resultSet.getInt("height_cm"));
-      player.setWeight_kg(resultSet.getInt("weight_kg"));
-      player.setLeague_name(resultSet.getString("league_name"));
-      player.setClub_name(resultSet.getString("club_name"));
-      player.setNationality_name(resultSet.getString("nationality_name"));
 
     } catch (SQLException throwables) {
       throwables.printStackTrace();
@@ -102,7 +103,7 @@ public class PlayerDAO {
     return player;
   }
 
-  public void save(Player player) {
+  public void save(PlayerEntity player) {
     try {
       PreparedStatement preparedStatement
           = connection.prepareStatement("INSERT INTO Players (id, short_name, long_name, player_positions, value_eur, age, height_cm, weight_kg, league_name, club_name, nationality_name) " +
@@ -131,7 +132,7 @@ public class PlayerDAO {
     }
   }
 
-  public void update(int id, Player updatePlayer) {
+  public void update(int id, PlayerEntity updatePlayer) {
     try {
       PreparedStatement preparedStatement =
           connection.prepareStatement("UPDATE Player SET short_name = ?, long_name = ?, player_positions = ?, value_eur = ?, age = ?, height_cm = ? , weight_kg = ? , league_name = ? , club_name = ?, nationality_name = ?  WHERE id=?");

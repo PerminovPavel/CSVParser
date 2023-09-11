@@ -1,6 +1,6 @@
 package ru.perminov.PlayerCsvParser;
 
-import ru.perminov.Entity.Player;
+import ru.perminov.Entity.PlayerEntity;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -32,7 +32,7 @@ public class CsvPlayerParser {
 
       while ((line = reader.readLine()) != null) {
 
-        Player player = parseFromStringToPlayer(line);
+        PlayerEntity player = parse(line);
 
         statement.setLong(1, player.getId());
         statement.setString(2, player.getShort_name());
@@ -57,7 +57,7 @@ public class CsvPlayerParser {
     }
   }
 
-  public Player parseFromStringToPlayer(String line){
+  public PlayerEntity parse(String line){
 
     String[] parts = line.split(",(?![\\s])");
 
@@ -73,18 +73,18 @@ public class CsvPlayerParser {
     String club_name = parts[20];
     String nationality_name = parts[27];
 
-    Player player = new Player.Builder()
+    PlayerEntity player = PlayerEntity.builder()
         .setId(id)
-        .setShortName(short_name)
-        .setLongName(long_name)
-        .setPlayerPositions(player_positions)
-        .setValueEur(value_eur)
+        .setShort_name(short_name)
+        .setLong_name(long_name)
+        .setPlayer_positions(player_positions)
+        .setValue_eur(value_eur)
         .setAge(age)
-        .setHeightCm(height_cm)
-        .setWeightKg(weight_kg)
-        .setLeagueName(league_name)
-        .setClubName(club_name)
-        .setNationalityName(nationality_name)
+        .setHeight_cm(height_cm)
+        .setWeight_kg(weight_kg)
+        .setLeague_name(league_name)
+        .setClub_name(club_name)
+        .setNationality_name(nationality_name)
         .build();
 
     return player;
