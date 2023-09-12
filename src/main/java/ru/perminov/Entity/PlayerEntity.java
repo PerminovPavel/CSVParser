@@ -4,89 +4,89 @@ import java.util.Objects;
 
 public final class PlayerEntity {
   private Long id;
-  private String short_name ;
-  private String long_name;
-  private String player_positions;
-  private int value_eur;
+  private String shortName;
+  private String longName;
+  private String playerPositions;
+  private int valueEur;
   private int age;
-  private int height_cm;
-  private double weight_kg;
-  private String league_name;
-  private String club_name;
-  private String nationality_name;
+  private int heightCm;
+  private double weightKg;
+  private String leagueName;
+  private String clubName;
+  private String nationalityName;
 
   public Long getId() {
     return id;
   }
 
-  public String getShort_name() {
-    return short_name;
+  public String getShortName() {
+    return shortName;
   }
 
-  public String getLong_name() {
-    return long_name;
+  public String getLongName() {
+    return longName;
   }
 
-  public String getPlayer_positions() {
-    return player_positions;
+  public String getPlayerPositions() {
+    return playerPositions;
   }
 
-  public int getValue_eur() {
-    return value_eur;
+  public int getValueEur() {
+    return valueEur;
   }
 
   public int getAge() {
     return age;
   }
 
-  public int getHeight_cm() {
-    return height_cm;
+  public int getHeightCm() {
+    return heightCm;
   }
 
-  public double getWeight_kg() {
-    return weight_kg;
+  public double getWeightKg() {
+    return weightKg;
   }
 
-  public String getLeague_name() {
-    return league_name;
+  public String getLeagueName() {
+    return leagueName;
   }
 
-  public String getClub_name() {
-    return club_name;
+  public String getClubName() {
+    return clubName;
   }
 
-  public String getNationality_name() {
-    return nationality_name;
+  public String getNationalityName() {
+    return nationalityName;
   }
 
   private PlayerEntity(Builder builder) {
     this.id = builder.id;
-    this.short_name = builder.short_name;
-    this.long_name = builder.long_name;
-    this.player_positions = builder.player_positions;
-    this.value_eur = builder.value_eur;
+    this.shortName = builder.shortName;
+    this.longName = builder.longName;
+    this.playerPositions = builder.playerPositions;
+    this.valueEur = builder.valueEur;
     this.age = builder.age;
-    this.height_cm = builder.height_cm;
-    this.weight_kg = builder.weight_kg;
-    this.league_name = builder.league_name;
-    this.club_name = builder.club_name;
-    this.nationality_name = builder.nationality_name;
+    this.heightCm = builder.heightCm;
+    this.weightKg = builder.weightKg;
+    this.leagueName = builder.leagueName;
+    this.clubName = builder.clubName;
+    this.nationalityName = builder.nationalityName;
   }
 
   @Override
   public String toString() {
     return "PlayerEntity{" +
         "id=" + id +
-        ", short_name='" + short_name + '\'' +
-        ", long_name='" + long_name + '\'' +
-        ", player_positions='" + player_positions + '\'' +
-        ", value_eur=" + value_eur +
+        ", short_name='" + shortName + '\'' +
+        ", long_name='" + longName + '\'' +
+        ", player_positions='" + playerPositions + '\'' +
+        ", value_eur=" + valueEur +
         ", age=" + age +
-        ", height_cm=" + height_cm +
-        ", weight_kg=" + weight_kg +
-        ", league_name='" + league_name + '\'' +
-        ", club_name='" + club_name + '\'' +
-        ", nationality_name='" + nationality_name + '\'' +
+        ", height_cm=" + heightCm +
+        ", weight_kg=" + weightKg +
+        ", league_name='" + leagueName + '\'' +
+        ", club_name='" + clubName + '\'' +
+        ", nationality_name='" + nationalityName + '\'' +
         '}';
   }
 
@@ -95,12 +95,12 @@ public final class PlayerEntity {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     PlayerEntity that = (PlayerEntity) o;
-    return value_eur == that.value_eur && age == that.age && height_cm == that.height_cm && Double.compare(that.weight_kg, weight_kg) == 0 && Objects.equals(id, that.id) && Objects.equals(short_name, that.short_name) && Objects.equals(long_name, that.long_name) && Objects.equals(player_positions, that.player_positions) && Objects.equals(league_name, that.league_name) && Objects.equals(club_name, that.club_name) && Objects.equals(nationality_name, that.nationality_name);
+    return valueEur == that.valueEur && age == that.age && heightCm == that.heightCm && Double.compare(that.weightKg, weightKg) == 0 && Objects.equals(id, that.id) && Objects.equals(shortName, that.shortName) && Objects.equals(longName, that.longName) && Objects.equals(playerPositions, that.playerPositions) && Objects.equals(leagueName, that.leagueName) && Objects.equals(clubName, that.clubName) && Objects.equals(nationalityName, that.nationalityName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, short_name, long_name, player_positions, value_eur, age, height_cm, weight_kg, league_name, club_name, nationality_name);
+    return Objects.hash(id, shortName, longName, playerPositions, valueEur, age, heightCm, weightKg, leagueName, clubName, nationalityName);
   }
 
   public static Builder builder() {
@@ -109,74 +109,74 @@ public final class PlayerEntity {
 
   public static final class Builder {
     private Long id;
-    private String short_name ;
-    private String long_name;
-    private String player_positions;
-    private int value_eur;
+    private String shortName;
+    private String longName;
+    private String playerPositions;
+    private int valueEur;
     private int age;
-    private int height_cm;
-    private double weight_kg;
-    private String league_name;
-    private String club_name;
-    private String nationality_name;
+    private int heightCm;
+    private double weightKg;
+    private String leagueName;
+    private String clubName;
+    private String nationalityName;
 
 
 
     private Builder() {
     }
 
-    public Builder setId(Long id) {
+    public Builder Id(Long id) {
       this.id = id;
       return this;
     }
 
-    public Builder setShort_name(String short_name) {
-      this.short_name = short_name;
+    public Builder ShortName(String shortName) {
+      this.shortName = shortName;
       return this;
     }
 
-    public Builder setLong_name(String long_name) {
-      this.long_name = long_name;
+    public Builder LongName(String longName) {
+      this.longName = longName;
       return this;
     }
 
-    public Builder setPlayer_positions(String player_positions) {
-      this.player_positions = player_positions;
+    public Builder PlayerPositions(String playerPositions) {
+      this.playerPositions = playerPositions;
       return this;
     }
 
-    public Builder setValue_eur(int value_eur) {
-      this.value_eur = value_eur;
+    public Builder ValueEur(int valueEur) {
+      this.valueEur = valueEur;
       return this;
     }
 
-    public Builder setAge(int age) {
+    public Builder Age(int age) {
       this.age = age;
       return this;
     }
 
-    public Builder setHeight_cm(int height_cm) {
-      this.height_cm = height_cm;
+    public Builder HeightCm(int heightCm) {
+      this.heightCm = heightCm;
       return this;
     }
 
-    public Builder setWeight_kg(double weight_kg) {
-      this.weight_kg = weight_kg;
+    public Builder WeightKg(double weightKg) {
+      this.weightKg = weightKg;
       return this;
     }
 
-    public Builder setLeague_name(String league_name) {
-      this.league_name = league_name;
+    public Builder LeagueName(String leagueName) {
+      this.leagueName = leagueName;
       return this;
     }
 
-    public Builder setClub_name(String club_name) {
-      this.club_name = club_name;
+    public Builder ClubName(String clubName) {
+      this.clubName = clubName;
       return this;
     }
 
-    public Builder setNationality_name(String nationality_name) {
-      this.nationality_name = nationality_name;
+    public Builder NationalityName(String nationalityName) {
+      this.nationalityName = nationalityName;
       return this;
     }
     public PlayerEntity build() {

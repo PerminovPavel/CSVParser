@@ -36,17 +36,17 @@ public class PlayerDAO {
          ResultSet resultSet = statement.executeQuery(SQL)){
       while (resultSet.next()) {
         PlayerEntity player = PlayerEntity.builder()
-            .setId(resultSet.getLong("id"))
-            .setShort_name(resultSet.getString("short_name"))
-            .setLong_name(resultSet.getString("long_name"))
-            .setPlayer_positions(resultSet.getString("player_positions"))
-            .setValue_eur(resultSet.getInt("value_eur"))
-            .setAge(resultSet.getInt("age"))
-            .setHeight_cm(resultSet.getInt("height_cm"))
-            .setWeight_kg(resultSet.getInt("weight_kg"))
-            .setLeague_name(resultSet.getString("league_name"))
-            .setClub_name(resultSet.getString("club_name"))
-            .setNationality_name(resultSet.getString("nationality_name"))
+            .Id(resultSet.getLong("id"))
+            .ShortName(resultSet.getString("short_name"))
+            .LongName(resultSet.getString("long_name"))
+            .PlayerPositions(resultSet.getString("player_positions"))
+            .ValueEur(resultSet.getInt("value_eur"))
+            .Age(resultSet.getInt("age"))
+            .HeightCm(resultSet.getInt("height_cm"))
+            .WeightKg(resultSet.getInt("weight_kg"))
+            .LeagueName(resultSet.getString("league_name"))
+            .ClubName(resultSet.getString("club_name"))
+            .NationalityName(resultSet.getString("nationality_name"))
             .build();
         players.add(player);
       }
@@ -65,17 +65,17 @@ public class PlayerDAO {
       ResultSet resultSet = preparedStatement.executeQuery();
       resultSet.next();
       player = PlayerEntity.builder()
-          .setId(resultSet.getLong("id"))
-          .setShort_name(resultSet.getString("short_name"))
-          .setLong_name(resultSet.getString("long_name"))
-          .setPlayer_positions(resultSet.getString("player_positions"))
-          .setValue_eur(resultSet.getInt("value_eur"))
-          .setAge(resultSet.getInt("age"))
-          .setHeight_cm(resultSet.getInt("height_cm"))
-          .setWeight_kg(resultSet.getInt("weight_kg"))
-          .setLeague_name(resultSet.getString("league_name"))
-          .setClub_name(resultSet.getString("club_name"))
-          .setNationality_name(resultSet.getString("nationality_name"))
+          .Id(resultSet.getLong("id"))
+          .ShortName(resultSet.getString("short_name"))
+          .LongName(resultSet.getString("long_name"))
+          .PlayerPositions(resultSet.getString("player_positions"))
+          .ValueEur(resultSet.getInt("value_eur"))
+          .Age(resultSet.getInt("age"))
+          .HeightCm(resultSet.getInt("height_cm"))
+          .WeightKg(resultSet.getInt("weight_kg"))
+          .LeagueName(resultSet.getString("league_name"))
+          .ClubName(resultSet.getString("club_name"))
+          .NationalityName(resultSet.getString("nationality_name"))
           .build();
 
     } catch (SQLException e) {
@@ -89,16 +89,16 @@ public class PlayerDAO {
              = connection.prepareStatement("INSERT INTO Players (id, short_name, long_name, player_positions, value_eur, age, height_cm, weight_kg, league_name, club_name, nationality_name) " +
                                                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )")){
       preparedStatement.setLong(1, player.getId());
-      preparedStatement.setString(2, player.getShort_name());
-      preparedStatement.setString(3, player.getLong_name());
-      preparedStatement.setString(4, player.getPlayer_positions());
-      preparedStatement.setInt(5, player.getValue_eur());
+      preparedStatement.setString(2, player.getShortName());
+      preparedStatement.setString(3, player.getLongName());
+      preparedStatement.setString(4, player.getPlayerPositions());
+      preparedStatement.setInt(5, player.getValueEur());
       preparedStatement.setInt(6, player.getAge());
-      preparedStatement.setInt(7, player.getHeight_cm());
-      preparedStatement.setDouble(8, player.getWeight_kg());
-      preparedStatement.setString(9, player.getLeague_name());
-      preparedStatement.setString(10, player.getClub_name());
-      preparedStatement.setString(11, player.getNationality_name());
+      preparedStatement.setInt(7, player.getHeightCm());
+      preparedStatement.setDouble(8, player.getWeightKg());
+      preparedStatement.setString(9, player.getLeagueName());
+      preparedStatement.setString(10, player.getClubName());
+      preparedStatement.setString(11, player.getNationalityName());
       preparedStatement.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
@@ -111,16 +111,16 @@ public class PlayerDAO {
                  "long_name = ?, player_positions = ?, value_eur = ?, age = ?, " +
                  "height_cm = ? , weight_kg = ? , league_name = ? , " +
                  "club_name = ?, nationality_name = ?  WHERE id=?");){
-      preparedStatement.setString(1, updatePlayer.getShort_name());
-      preparedStatement.setString(2, updatePlayer.getLong_name());
-      preparedStatement.setString(3, updatePlayer.getPlayer_positions());
-      preparedStatement.setInt(4, updatePlayer.getValue_eur());
+      preparedStatement.setString(1, updatePlayer.getShortName());
+      preparedStatement.setString(2, updatePlayer.getLongName());
+      preparedStatement.setString(3, updatePlayer.getPlayerPositions());
+      preparedStatement.setInt(4, updatePlayer.getValueEur());
       preparedStatement.setInt(5, updatePlayer.getAge());
-      preparedStatement.setInt(6, updatePlayer.getHeight_cm());
-      preparedStatement.setDouble(7, updatePlayer.getWeight_kg());
-      preparedStatement.setString(8, updatePlayer.getLeague_name());
-      preparedStatement.setString(9, updatePlayer.getClub_name());
-      preparedStatement.setString(10, updatePlayer.getNationality_name());
+      preparedStatement.setInt(6, updatePlayer.getHeightCm());
+      preparedStatement.setDouble(7, updatePlayer.getWeightKg());
+      preparedStatement.setString(8, updatePlayer.getLeagueName());
+      preparedStatement.setString(9, updatePlayer.getClubName());
+      preparedStatement.setString(10, updatePlayer.getNationalityName());
       preparedStatement.setInt(11, id);
       preparedStatement.executeUpdate();
     } catch (SQLException e) {

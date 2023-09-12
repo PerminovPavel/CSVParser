@@ -35,16 +35,16 @@ public class CsvPlayerParser {
         PlayerEntity player = parseString(line);
 
         statement.setLong(1, player.getId());
-        statement.setString(2, player.getShort_name());
-        statement.setString(3, player.getLong_name());
-        statement.setString(4, player.getPlayer_positions());
-        statement.setInt(5, player.getValue_eur());
+        statement.setString(2, player.getShortName());
+        statement.setString(3, player.getLongName());
+        statement.setString(4, player.getPlayerPositions());
+        statement.setInt(5, player.getValueEur());
         statement.setInt(6, player.getAge());
-        statement.setInt(7, player.getHeight_cm());
-        statement.setDouble(8, player.getWeight_kg());
-        statement.setString(9, player.getLeague_name());
-        statement.setString(10, player.getClub_name());
-        statement.setString(11, player.getNationality_name());
+        statement.setInt(7, player.getHeightCm());
+        statement.setDouble(8, player.getWeightKg());
+        statement.setString(9, player.getLeagueName());
+        statement.setString(10, player.getClubName());
+        statement.setString(11, player.getNationalityName());
         statement.addBatch();
 
         if (++count % batchSize == 0) {
@@ -74,17 +74,17 @@ public class CsvPlayerParser {
     String nationality_name = parts[27];
 
     PlayerEntity player = PlayerEntity.builder()
-        .setId(id)
-        .setShort_name(short_name)
-        .setLong_name(long_name)
-        .setPlayer_positions(player_positions)
-        .setValue_eur(value_eur)
-        .setAge(age)
-        .setHeight_cm(height_cm)
-        .setWeight_kg(weight_kg)
-        .setLeague_name(league_name)
-        .setClub_name(club_name)
-        .setNationality_name(nationality_name)
+        .Id(id)
+        .ShortName(short_name)
+        .LongName(long_name)
+        .PlayerPositions(player_positions)
+        .ValueEur(value_eur)
+        .Age(age)
+        .HeightCm(height_cm)
+        .WeightKg(weight_kg)
+        .LeagueName(league_name)
+        .ClubName(club_name)
+        .NationalityName(nationality_name)
         .build();
 
     return player;
