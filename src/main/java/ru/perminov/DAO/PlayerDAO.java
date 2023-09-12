@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerDAO {
-  private static final String jdbcUrl = "jdbc:postgresql://localhost:5400/postgres";
-  private static final String username = "userok";
-  private static final String password = "p@ssw0rd";
+  private static final String JDBC_URL = "jdbc:postgresql://localhost:5400/postgres";
+  private static final String USERNAME = "userok";
+  private static final String PASSWORD = "p@ssw0rd";
 
   private static Connection connection;
 
@@ -21,7 +21,7 @@ public class PlayerDAO {
     }
 
     try {
-      connection = DriverManager.getConnection(jdbcUrl, username, password);
+      connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
     } catch (SQLException throwables) {
       throwables.printStackTrace();
     }
@@ -30,11 +30,10 @@ public class PlayerDAO {
   public List<PlayerEntity> index() {
     List<PlayerEntity> players = new ArrayList<>();
 
-    try {
-      Statement statement = connection.createStatement();
-      String SQL = "SELECT * FROM players";
-      ResultSet resultSet = statement.executeQuery(SQL);
+    String SQL = "SELECT * FROM players";
 
+    try (Statement statement = connection.createStatement();
+         ResultSet resultSet = statement.executeQuery(SQL)){
       while (resultSet.next()) {
         PlayerEntity player = PlayerEntity.builder()
             .setId(resultSet.getLong("id"))
@@ -49,34 +48,22 @@ public class PlayerDAO {
             .setClub_name(resultSet.getString("club_name"))
             .setNationality_name(resultSet.getString("nationality_name"))
             .build();
-
         players.add(player);
       }
 
-    } catch (SQLException throwables) {
-      throwables.printStackTrace();
-    }
-    try {
-      connection.close();
     } catch (SQLException e) {
-      throw new RuntimeException(e);
+      e.printStackTrace();
     }
     return players;
   }
 
   public PlayerEntity show (int id) {
     PlayerEntity player = null;
-
-    try {
-      PreparedStatement preparedStatement =
-          connection.prepareStatement("SELECT * FROM players WHERE id=?");
-
+    try (PreparedStatement preparedStatement =
+             connection.prepareStatement("SELECT * FROM players WHERE id=?");){
       preparedStatement.setInt(1, id);
-
       ResultSet resultSet = preparedStatement.executeQuery();
-
       resultSet.next();
-
       player = PlayerEntity.builder()
           .setId(resultSet.getLong("id"))
           .setShort_name(resultSet.getString("short_name"))
@@ -91,24 +78,16 @@ public class PlayerDAO {
           .setNationality_name(resultSet.getString("nationality_name"))
           .build();
 
-
-    } catch (SQLException throwables) {
-      throwables.printStackTrace();
-    }
-    try {
-      connection.close();
     } catch (SQLException e) {
-      throw new RuntimeException(e);
+      e.printStackTrace();
     }
     return player;
   }
 
   public void save(PlayerEntity player) {
-    try {
-      PreparedStatement preparedStatement
-          = connection.prepareStatement("INSERT INTO Players (id, short_name, long_name, player_positions, value_eur, age, height_cm, weight_kg, league_name, club_name, nationality_name) " +
-          "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )");
-
+    try (PreparedStatement preparedStatement
+             = connection.prepareStatement("INSERT INTO Players (id, short_name, long_name, player_positions, value_eur, age, height_cm, weight_kg, league_name, club_name, nationality_name) " +
+                                                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )")){
       preparedStatement.setLong(1, player.getId());
       preparedStatement.setString(2, player.getShort_name());
       preparedStatement.setString(3, player.getLong_name());
@@ -120,23 +99,18 @@ public class PlayerDAO {
       preparedStatement.setString(9, player.getLeague_name());
       preparedStatement.setString(10, player.getClub_name());
       preparedStatement.setString(11, player.getNationality_name());
-
       preparedStatement.executeUpdate();
-    } catch (SQLException throwables) {
-      throwables.printStackTrace();
-    }
-    try {
-      connection.close();
     } catch (SQLException e) {
-      throw new RuntimeException(e);
+      e.printStackTrace();
     }
   }
 
   public void update(int id, PlayerEntity updatePlayer) {
-    try {
-      PreparedStatement preparedStatement =
-          connection.prepareStatement("UPDATE Player SET short_name = ?, long_name = ?, player_positions = ?, value_eur = ?, age = ?, height_cm = ? , weight_kg = ? , league_name = ? , club_name = ?, nationality_name = ?  WHERE id=?");
-
+    try (PreparedStatement preparedStatement =
+             connection.prepareStatement("UPDATE Player SET short_name = ?, " +
+                 "long_name = ?, player_positions = ?, value_eur = ?, age = ?, " +
+                 "height_cm = ? , weight_kg = ? , league_name = ? , " +
+                 "club_name = ?, nationality_name = ?  WHERE id=?");){
       preparedStatement.setString(1, updatePlayer.getShort_name());
       preparedStatement.setString(2, updatePlayer.getLong_name());
       preparedStatement.setString(3, updatePlayer.getPlayer_positions());
@@ -148,33 +122,18 @@ public class PlayerDAO {
       preparedStatement.setString(9, updatePlayer.getClub_name());
       preparedStatement.setString(10, updatePlayer.getNationality_name());
       preparedStatement.setInt(11, id);
-
       preparedStatement.executeUpdate();
-    } catch (SQLException throwables) {
-      throwables.printStackTrace();
-    }
-    try {
-      connection.close();
     } catch (SQLException e) {
-      throw new RuntimeException(e);
+      e.printStackTrace();
     }
   }
 
   public void delete(int id) {
-    PreparedStatement preparedStatement = null;
-    try {
-      preparedStatement = connection.prepareStatement("DELETE FROM players WHERE id=?");
-
+    try (PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM players WHERE id=?")) {
       preparedStatement.setInt(1, id);
-
       preparedStatement.executeUpdate();
-    } catch (SQLException throwables) {
-      throwables.printStackTrace();
-    }
-    try {
-      connection.close();
     } catch (SQLException e) {
-      throw new RuntimeException(e);
+      e.printStackTrace();
     }
   }
 }

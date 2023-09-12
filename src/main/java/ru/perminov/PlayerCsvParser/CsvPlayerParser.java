@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 public class CsvPlayerParser {
 
-  public void parseCSVtoDataBase(String path){
+  public void parse(String path){
     String jdbcUrl = "jdbc:postgresql://localhost:5400/postgres";
     String username = "userok";
     String password = "p@ssw0rd";
@@ -32,7 +32,7 @@ public class CsvPlayerParser {
 
       while ((line = reader.readLine()) != null) {
 
-        PlayerEntity player = parse(line);
+        PlayerEntity player = parseString(line);
 
         statement.setLong(1, player.getId());
         statement.setString(2, player.getShort_name());
@@ -57,7 +57,7 @@ public class CsvPlayerParser {
     }
   }
 
-  public PlayerEntity parse(String line){
+  public PlayerEntity parseString(String line){
 
     String[] parts = line.split(",(?![\\s])");
 
